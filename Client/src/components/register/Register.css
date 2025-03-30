@@ -1,0 +1,178 @@
+
+/* register.css */
+.register-section {
+    padding: 80px 0;
+}
+
+.auth-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab.active {
+    color: #ff6b6b;
+    border-bottom: 3px solid #ff6b6b;
+}
+
+.register-content {
+    padding: 30px 40px;
+}
+
+.register-content h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.register-subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #777;
+}
+
+.social-register {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    background-color: #f9f9f9;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.google-btn .social-icon {
+    color: #4285F4;
+    font-weight: bold;
+}
+
+.facebook-btn .social-icon {
+    color: #3b5998;
+    font-weight: bold;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+    color: #777;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+    padding: 0 15px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ff6b6b;
+}
+
+.password-hint {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    font-weight: normal;
+}
+
+.checkbox-group a {
+    color: #ff6b6b;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #555;
+}
+
+.login-link a {
+    color: #ff6b6b;
+    font-weight: 600;
+}

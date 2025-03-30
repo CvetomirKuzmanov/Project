@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleHub - Product Details</title>
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/product-details.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">Style<span>Hub</span></div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Shop</a>
+                <a href="#" class="nav-link">Collections</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <div class="nav-icon">
+                    <span class="icon">🔍</span>
+                    <span class="icon-text">Search</span>
+                </div>
+                <div class="nav-icon">
+                    <span class="icon">👤</span>
+                    <span class="icon-text">Account</span>
+                </div>
+                <div class="nav-icon">
+                    <span class="icon">❤️</span>
+                    <span class="icon-text">Favorites</span>
+                </div>
+                <div class="nav-icon">
+                    <span class="icon">🛒</span>
+                    <span class="icon-text">Cart</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb container">
+        <a href="index.html">Home</a> / 
+        <a href="#">Shop</a> / 
+        <span class="current-page">Product Details</span>
+    </div>
+
+    <!-- Product Details Section -->
+    <section class="product-details">
+        <div class="container">
+            <div class="product-details-grid">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image">
+                        <img src="images/product-main.jpg" alt="Product Main Image" id="main-product-image">
+                    </div>
+                    <div class="thumbnail-images">
+                        <img src="images/product-thumb-1.jpg" alt="Product Thumbnail 1" class="thumbnail active" onclick="changeImage('images/product-main.jpg')">
+                        <img src="images/product-thumb-2.jpg" alt="Product Thumbnail 2" class="thumbnail" onclick="changeImage('images/product-thumb-2.jpg')">
+                        <img src="images/product-thumb-3.jpg" alt="Product Thumbnail 3" class="thumbnail" onclick="changeImage('images/product-thumb-3.jpg')">
+                        <img src="images/product-thumb-4.jpg" alt="Product Thumbnail 4" class="thumbnail" onclick="changeImage('images/product-thumb-4.jpg')">
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="product-info-container">
+                    <div class="product-tag">New</div>
+                    <h1 class="product-title">Denim Jacket with Buttons</h1>
+                    <div class="product-price">
+                        <span class="current-price">$59.99</span>
+                        <span class="old-price">$79.99</span>
+                        <span class="discount">25% OFF</span>
+                    </div>
+                    
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(42 reviews)</span>
+                    </div>
+                    
+                    <div class="product-description">
+                        <p>Classic denim jacket with button closure and front pockets. Made from premium quality denim fabric for durability and style. Perfect for casual outings and everyday wear.</p>
+                    </div>
+                    
+                    <div class="product-features">
+                        <h3>Key Features:</h3>
+                        <ul>
+                            <li>100% premium denim fabric</li>
+                            <li>Button closure front</li>
+                            <li>Two chest pockets</li>
+                            <li>Adjustable cuffs</li>
+                            <li>Machine washable</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="product-variants">
+                        <div class="variant-section">
+                            <h3>Color:</h3>
+                            <div class="color-options">
+                                <div class="color-option blue active" data-color="Blue"></div>
+                                <div class="color-option black" data-color="Black"></div>
+                                <div class="color-option light-blue" data-color="Light Blue"></div>
+                            </div>
+                            <span class="selected-color">Blue</span>
+                        </div>
+                        
+                        <div class="variant-section">
+                            <h3>Size:</h3>
+                            <div class="size-options">
+                                <div class="size-option" data-size="XS">XS</div>
+                                <div class="size-option" data-size="S">S</div>
+                                <div class="size-option active" data-size="M">M</div>
+                                <div class="size-option" data-size="L">L</div>
+                                <div class="size-option" data-size="XL">XL</div>
+                                <div class="size-option" data-size="XXL">XXL</div>
+                            </div>
+                            <a href="#" class="size-guide">Size Guide</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    
+                    <div class="product-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">SKU:</span>
+                            <span class="meta-value">DJB-2025-BLU</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Category:</span>
+                            <span class="meta-value">Jackets, Denim</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Tags:</span>
+                            <span class="meta-value">denim, jacket, casual, blue</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-delivery">
+                        <div class="delivery-option">
+                            <span class="delivery-icon">🚚</span>
+                            <span class="delivery-text">Free shipping on orders over $50</span>
+                        </div>
+                        <div class="delivery-option">
+                            <span class="delivery-icon">↩️</span>
+                            <span class="delivery-text">30-day return policy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-share">
+                        <span class="share-label">Share:</span>
+                        <div class="share-icons">
+                            <a href="#" class="share-icon">f</a>
+                            <a href="#" class="share-icon">t</a>
+                            <a href="#" class="share-icon">in</a>
+                            <a href="#" class="share-icon">ig</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="description">Description</button>
+                    <button class="tab-btn" data-tab="details">Additional Details</button>
+                    <button class="tab-btn" data-tab="reviews">Reviews (42)</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description">
+                        <p>Elevate your casual wardrobe with our premium denim jacket. This versatile piece features a classic design with modern details, perfect for layering in any season. The durable denim fabric ensures long-lasting wear while maintaining comfort throughout the day.</p>
+                        <p>The jacket includes adjustable cuffs and button closure, allowing for a customizable fit. Two chest pockets provide practical storage while enhancing the jacket's timeless appeal. Whether paired with jeans for a double denim look or thrown over a dress for an edgy contrast, this jacket is a must-have staple for any fashion-forward individual.</p>
+                    </div>
+                    
+                    <div class="tab-pane" id="details">
+                        <h3>Product Specifications</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <td class="spec-name">Material</td>
+                                <td class="spec-value">100% Cotton Denim</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-name">Weight</td>
+                                <td class="spec-value">Medium-weight (12oz)</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-name">Fit</td>
+                                <td class="spec-value">Regular</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-name">Closure</td>
+                                <td class="spec-value">Button</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-name">Pockets</td>
+                                <td class="spec-value">Two chest, two side</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-name">Care Instructions</td>
+                                <td class="spec-value">Machine wash cold, tumble dry low</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-name">Origin</td>
+                                <td class="spec-value">Imported</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tab-pane" id="reviews">
+                        <div class="review-summary">
+                            <div class="average-rating">
+                                <span class="rating-number">4.2</span>
+                                <div class="stars">★★★★☆</div>
+                                <span class="total-reviews">Based on 42 reviews</span>
+                            </div>
+                            <div class="rating-breakdown">
+                                <div class="rating-bar">
+                                    <span class="rating-label">5 stars</span>
+                                    <div class="progress-bar"><div class="progress" style="width: 65%"></div></div>
+                                    <span class="rating-count">28</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">4 stars</span>
+                                    <div class="progress-bar"><div class="progress" style="width: 20%"></div></div>
+                                    <span class="rating-count">8</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">3 stars</span>
+                                    <div class="progress-bar"><div class="progress" style="width: 10%"></div></div>
+                                    <span class="rating-count">4</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">2 stars</span>
+                                    <div class="progress-bar"><div class="progress" style="width: 5%"></div></div>
+                                    <span class="rating-count">2</span>
+                                </div>
+                                <div class="rating-bar">
+                                    <span class="rating-label">1 star</span>
+                                    <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                                    <span class="rating-count">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="user-reviews">
+                            <div class="review">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Sarah J.</span>
+                                    <div class="review-rating">★★★★★</div>
+                                    <span class="review-date">March 10, 2025</span>
+                                </div>
+                                <div class="review-content">
+                                    <p>This jacket is amazing! The quality is outstanding and it fits perfectly. I've received so many compliments already. Definitely worth the price!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="review">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Mike T.</span>
+                                    <div class="review-rating">★★★★☆</div>
+                                    <span class="review-date">February 28, 2025</span>
+                                </div>
+                                <div class="review-content">
+                                    <p>Great jacket overall. The denim is sturdy and the design is classic. Took away one star because the sleeves are a bit longer than expected, but otherwise a solid purchase.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="review">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Lisa M.</span>
+                                    <div class="review-rating">★★★★★</div>
+                                    <span class="review-date">February 15, 2025</span>
+                                </div>
+                                <div class="review-content">
+                                    <p>I'm in love with this jacket! The color is exactly as pictured and the fit is perfect. It's become my go-to piece for casual outings.</p>
+                                </div>
+                            </div>
+                            
+                            <button class="load-more-btn">Load More Reviews</button>
+                        </div>
+                        
+                        <div class="write-review">
+                            <h3>Write a Review</h3>
+                            <form class="review-form">
+                                <div class="form-group">
+                                    <label>Your Rating:</label>
+                                    <div class="rating-selector">
+                                        <span class="rating-star" data-rating="1">☆</span>
+                                        <span class="rating-star" data-rating="2">☆</span>
+                                        <span class="rating-star" data-rating="3">☆</span>
+                                        <span class="rating-star" data-rating="4">☆</span>
+                                        <span class="rating-star" data-rating="5">☆</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review-title">Review Title:</label>
+                                    <input type="text" id="review-title" placeholder="Summarize your review">
+                                </div>
+                                <div class="form-group">
+                                    <label for="review-content">Your Review:</label>
+                                    <textarea id="review-content" rows="5" placeholder="Write your review here..."></textarea>
+                                </div>
+                                <button type="submit" class="submit-review-btn">Submit Review</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div class="related-products">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-img">
+                            Product Image
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">❤️</div>
+                                <div class="product-action-btn">🛒</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Cotton T-Shirt with Print</h3>
+                            <div class="product-price">
+                                <span class="current-price">$29.99</span>
+                                <span class="old-price">$39.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img">
+                            Product Image
+                            <div class="product-tag">Sale</div>
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">❤️</div>
+                                <div class="product-action-btn">🛒</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Slim Fit Chino Pants</h3>
+                            <div class="product-price">
+                                <span class="current-price">$44.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img">
+                            Product Image
+                            <div class="product-tag">Hot</div>
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">❤️</div>
+                                <div class="product-action-btn">🛒</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Summer Floral Dress</h3>
+                            <div class="product-price">
+                                <span class="current-price">$49.99</span>
+                                <span class="old-price">$64.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img">
+                            Product Image
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">❤️</div>
+                                <div class="product-action-btn">🛒</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Casual Hooded Sweatshirt</h3>
+                            <div class="product-price">
+                                <span class="current-price">$39.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>StyleHub</h3>
+                    <p>Your one-stop destination for all your fashion needs. Discover the latest trends and styles.</p>
+                    <div class="social-links">
+                        <div class="social-link">f</div>
+                        <div class="social-link">t</div>
+                        <div class="social-link">in</div>
+                        <div class="social-link">ig</div>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Men's Clothing</a></li>
+                        <li class="footer-link"><a href="#">Women's Clothing</a></li>
+                        <li class="footer-link"><a href="#">Accessories</a></li>
+                        <li class="footer-link"><a href="#">Footwear</a></li>
+                        <li class="footer-link"><a href="#">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">About Us</a></li>
+                        <li class="footer-link"><a href="#">Contact Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="#">Our Stores</a></li>
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Help</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">FAQs</a></li>
+                        <li class="footer-link"><a href="#">Shipping & Returns</a></li>
+                        <li class="footer-link"><a href="#">Order Tracking</a></li>
+                        <li class="footer-link"><a href="#">Size Guide</a></li>
+                        <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Image gallery functionality
+        function changeImage(src) {
+            document.getElementById('main-product-image').src = src;
+            
+            // Update active thumbnail
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+                if (thumb.getAttribute('onclick').includes(src)) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+        
+        // Quantity selector
+        document.addEventListener('DOMContentLoaded', function() {
+            const minusBtn = document.querySelector('.minus');
+            const plusBtn = document.querySelector('.plus');
+            const quantityInput = document.querySelector('.quantity-input');
+            
+            minusBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            // Product tab functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and panes
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding tab pane
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Color selector
+            const colorOptions = document.querySelectorAll('.color-option');
+            const selectedColor = document.querySelector('.selected-color');
+            
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedColor.textContent = this.getAttribute('data-color');
+                });
+            });
+            
+            // Size selector
+            const sizeOptions = document.querySelectorAll('.size-option');
+            
+            sizeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    sizeOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Rating selector
+            const ratingStars = document.querySelectorAll('.rating-star');
+            
+            ratingStars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-rating');
+                    ratingStars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.textContent = '★';
+                        } else {
+                            s.textContent = '☆';
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const rating = this.getAttribute('data-rating');
+                    ratingStars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.textContent = '★';
+                        } else {
+                            s.textContent = '☆';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

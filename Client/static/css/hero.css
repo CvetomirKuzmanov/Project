@@ -1,0 +1,40 @@
+/* Hero Section Styles */
+.hero {
+    height: 500px;
+    background-color: #f1f2f3;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.hero-description {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.hero-btn {
+    display: inline-block;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.hero-btn:hover {
+    background-color: #ff5252;
+}

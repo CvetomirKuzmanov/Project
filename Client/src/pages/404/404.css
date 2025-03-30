@@ -1,0 +1,74 @@
+.error-section {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.error-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 50px 30px;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.error-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.error-message {
+    color: #777;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.home-btn {
+    display: inline-block;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background-color: #ff5252;
+    color: #ffe9e9;
+    transform: translateY(-2px);
+}
+
+.contact-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: #333;
+    padding: 12px 30px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
