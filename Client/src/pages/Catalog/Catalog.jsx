@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Catalog.css';
 import Search from '../../components/search/Search';
 import { useLatestProducts } from '../../api/productApi';
@@ -7,16 +7,49 @@ import Pagination from '../../components/pagination/Pagination';
 
 export default function Catalog() {
     const { latestProducts } = useLatestProducts();
+    const [products, setProducts] = useState([]);
     const [itemOffset, setItemOffset] = useState(0);
+    const [sortType, setSortType] = useState('Featured');
     const itemsPerPage = 6;
+
+    // Initialize products when data loads
+    useEffect(() => {
+        if (latestProducts.length > 0) {
+            setProducts([...latestProducts]);
+        }
+    }, [latestProducts]);
+
+    const handleSortChange = (e) => {
+        const sortValue = e.target.value;
+        setSortType(sortValue);
+        
+        const sortedProducts = [...products];
+        
+        switch(sortValue) {
+            case 'Price: Low to High':
+                sortedProducts.sort((a, b) => Number(a.price - b.price));
+                break;
+            case 'Price: High to Low':
+                sortedProducts.sort((a, b) => b.price - a.price);
+                break;
+            case 'Name: A to Z':
+                sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'Name: Z to A':
+                sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
+                break;
+        }
+        
+        setProducts(sortedProducts);
+    };
 
     // Calculate page details
     const endOffset = itemOffset + itemsPerPage;
-    const currentProducts = latestProducts.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(latestProducts.length / itemsPerPage);
+    const currentProducts = products.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(products.length / itemsPerPage);
 
     const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % latestProducts.length;
+        const newOffset = (event.selected * itemsPerPage) % products.length;
         setItemOffset(newOffset);
         window.scrollTo(0, 0);
     };
@@ -32,12 +65,16 @@ export default function Catalog() {
                             <div className="catalog-tools">
                                 <div className="catalog-sort">
                                     <label htmlFor="sort-by">Sort by:</label>
-                                    <select id="sort-by" className="sort-select">
-                                        <option>Featured</option>
+                                    <select 
+                                        id="sort-by" 
+                                        className="sort-select"
+                                        value={sortType}
+                                        onChange={handleSortChange}
+                                    >
                                         <option>Price: Low to High</option>
                                         <option>Price: High to Low</option>
-                                        <option>Newest</option>
-                                        <option>Best Selling</option>
+                                        <option>Name: A to Z</option>
+                                        <option>Name: Z to A</option>
                                     </select>
                                 </div>
                                 <div className="catalog-view">
@@ -46,14 +83,15 @@ export default function Catalog() {
                                 </div>
                             </div>
                         </div>
+                        
                         <div className="product-grid catalog-grid">
                             {currentProducts.map(product => (
-                                <Product
-                                    key={product.name}
-                                    {...product}
-                                />
+                                <div key={product.name}>
+                                    <Product {...product} />
+                                </div>
                             ))}
                         </div>
+                        
                         <Pagination 
                             pageCount={pageCount} 
                             onPageChange={handlePageClick} 
