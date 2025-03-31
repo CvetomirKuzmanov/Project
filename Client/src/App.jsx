@@ -24,20 +24,25 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path='/' element={<Home />} />
+				<Route path="/details" element={<ProductDetails />} />
+				<Route path="/about" element={<About />} />
+				<Route path="/catalog" element={<Catalog />} />
+				<Route element={<AuthGuard />}>
+					<Route path="/logout" element={<Logout />} />
+					<Route path="/create" element={<CreateProduct />} />]
+				</Route>
+
 				<Route element={<GuestGuard />}>
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 				</Route>
+
+
+
 				<Route path='*' element={<PageNotFound />} />
-				<Route path="/logout" element={<Logout />} />
-				<Route path="/catalog" element={<Catalog />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/create" element={<CreateProduct />} />]
-				<Route path="/details" element={<ProductDetails />} />
-
-
 			</Routes >
 			<Footer />
+
 			<ToastContainer />
 		</UserProvider>
 	
