@@ -1,0 +1,45 @@
+/* Pagination.css */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 0.5rem;
+}
+
+.pagination a {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination a.active {
+    background-color: #333;
+    color: white;
+}
+
+.pagination-dots {
+    margin: 0 0.25rem;
+}
+
+/* Customize React Paginate container to match your design */
+.pagination li {
+    display: inline-block;
+    list-style: none;
+}
+
+.pagination li a {
+    outline: none;
+}

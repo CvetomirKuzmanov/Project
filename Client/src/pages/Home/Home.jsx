@@ -1,7 +1,7 @@
 import './Home.css'
 
-import { Link } from "react-router";
 import { useLatestProducts } from '../../api/productApi';
+import Product from '../../components/product/Product';
 
 export default function Home() {
 
@@ -26,28 +26,10 @@ export default function Home() {
                 <div className="container">
                     <h2 className="section-title">Featured Products</h2>
                     <div className="product-grid">
-
-
-
-                        {latestProducts.map(product => (
-                            <div className="product-card" key={product.name}>
-                                <div className="product-img">
-                                    {product.image}
-                                    <div className="product-actions">
-                                        <Link to={`/products/${product.name}/details`}><div className="product-action-btn">👁️</div></Link>
-                                        <div className="product-action-btn">❤️</div>
-                                        <div className="product-action-btn">🛒</div>
-                                    </div>
-                                </div>
-                                <div className="product-info">
-                                    <h3 className="product-name">{product.name}</h3>
-                                    <div className="product-price">
-                                        <span className="current-price">${product.price}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        ))}
+                        {latestProducts.map(product => <Product 
+                        key={product.name}
+                        {...product} 
+                        />)}
                     </div>
                 </div>
             </section>

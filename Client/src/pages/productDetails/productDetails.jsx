@@ -15,23 +15,8 @@ export default function ProductDetails() {
     navigate('/catalog');
   };
 
-  // Common categories for an e-commerce store
-  const categories = [
-    "Clothing",
-    "Footwear",
-    "Accessories",
-    "Electronics",
-    "Home & Kitchen",
-    "Beauty",
-    "Sports"
-  ];
 
-  // Size options based on category
-  const sizeOptions = {
-    Clothing: ["XS", "S", "M", "L", "XL", "XXL"],
-    Footwear: ["5", "6", "7", "8", "9", "10", "11", "12"],
-    default: ["One Size"]
-  };
+
 
   return (
     <div className="product-page-container">
@@ -46,7 +31,6 @@ export default function ProductDetails() {
         <div className="container">
           <div className="product-form-wrapper">
             <form onSubmit={handleSubmit} className="product-form">
-              {/* Basic Product Information */}
               <div className="form-section">
                 <h2 className="form-section-title">Basic Information</h2>
                 <div className="form-grid">

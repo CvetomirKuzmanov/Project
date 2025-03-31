@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import request from "../utils/request";
 import useAuth from "../hooks/useAuth";
-import { v4 as uuidv4 } from 'uuid'; // Import UUID library for generating unique IDs
+import { v4 as uuidv4 } from 'uuid'; 
 
 const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/products`;
 
@@ -50,11 +50,10 @@ export const useCreateProduct = () => {
   const { request } = useAuth();
   
   const create = (productData) => {
-    // Generate a unique ID for the new product
     const productWithId = {
       ...productData,
-      _id: uuidv4(), // Generate unique ID
-      _createdOn: Date.now() // Add creation timestamp
+      _id: uuidv4(),
+      _createdOn: Date.now()
     };
     
     return request.post(baseUrl, productWithId);

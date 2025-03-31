@@ -12,7 +12,7 @@ import AuthGuard from './components/guards/AuthGuard'
 import GuestGuard from './components/guards/GuestGuard'
 
 import UserProvider from './providers/UserProvider'
-import Search from './pages/Search/Search';
+import Catalog from './pages/Catalog/Catalog';
 import About from './pages/About/About';
 import CreateProduct from './pages/createProduct/createProduct';
 import ProductDetails from './pages/productDetails/productDetails';
@@ -30,9 +30,9 @@ function App() {
 				</Route>
 				<Route path='*' element={<PageNotFound />} />
 				<Route path="/logout" element={<Logout />} />
-				<Route path="/catalog" element={<Search />} />
+				<Route path="/catalog" element={<Catalog />} />
 				<Route path="/about" element={<About />} />
-				<Route path="/products" element={<CreateProduct />} />]
+				<Route path="/create" element={<CreateProduct />} />]
 				<Route path="/details" element={<ProductDetails />} />
 
 
