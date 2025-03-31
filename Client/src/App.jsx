@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router'
 import { ToastContainer } from 'react-toastify'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
 
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -20,31 +22,33 @@ import ProductDetails from './pages/productDetails/productDetails';
 
 function App() {
 	return (
-		<UserProvider>
-			<Header />
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path="/details" element={<ProductDetails />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/catalog" element={<Catalog />} />
-				<Route element={<AuthGuard />}>
-					<Route path="/logout" element={<Logout />} />
-					<Route path="/create" element={<CreateProduct />} />]
-				</Route>
+		<Provider store={store}>
+			<UserProvider>
+				<Header />
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path="/details" element={<ProductDetails />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/catalog" element={<Catalog />} />
+					<Route element={<AuthGuard />}>
+						<Route path="/logout" element={<Logout />} />
+						<Route path="/create" element={<CreateProduct />} />]
+					</Route>
 
-				<Route element={<GuestGuard />}>
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
-				</Route>
+					<Route element={<GuestGuard />}>
+						<Route path="/login" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+					</Route>
 
 
 
-				<Route path='*' element={<PageNotFound />} />
-			</Routes >
-			<Footer />
+					<Route path='*' element={<PageNotFound />} />
+				</Routes >
+				<Footer />
 
-			<ToastContainer />
-		</UserProvider>
+				<ToastContainer />
+			</UserProvider>
+		</Provider>
 	
 		
 );

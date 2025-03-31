@@ -1,129 +1,66 @@
-import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
+import { fetchProductList, fetchAverageRating, updateRating } from '../store/slices/productSlice';
+import { addToCart, removeFromCart, loadCartData } from '../store/slices/cartSlice';
+import useAuth from '../hooks/useAuth';
 
-export const StoreContext = createContext(null);
+export const useStore = () => {
+    const dispatch = useDispatch();
+    const { items: cartItems, loading: cartLoading } = useSelector(state => state.cart);
+    const { items: productList, ratings, loading: productLoading } = useSelector(state => state.products);
+    const { isAuthenticated, accessToken } = useAuth();
 
-let StoreContextProvider = (props) => {
-    const url = import.meta.env.VITE_BACKEND_URL;
-    let [cartItems, setCartItems] = useState({});
-    let [token, setToken] = useState("")
-    let [food_list, setFoodList] = useState([]);
-    
-
-    let addToCart = async (itemId) => {
-        if (!cartItems[itemId]) {
-            setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-        } else {
-            setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+    const handleAddToCart = async (name) => {
+        console.log('Adding to cart:', { name, isAuthenticated, accessToken });
+        if (!isAuthenticated) {
+            toast.error('Please login to add items to cart');
+            return;
         }
-        if (token) {
-            await axios.post(url + '/api/cart/add', { itemId }, {
-                headers:{ token }
-            })
-        }
+        dispatch(addToCart({ name, token: accessToken }));
+        toast.success('Added to cart!');
     };
 
-    let removeFromCart = async (itemId) => {
-        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-        if (token) {
-            await axios.post(url + '/api/cart/remove', { itemId }, {
-                headers:{ token }
-            })
-        }
+    const handleRemoveFromCart = async (name) => {
+        console.log('Removing from cart:', { name });
+        dispatch(removeFromCart({ name, token: accessToken }));
     };
 
-    let getTotalCartAmount = () => {
+    const getTotalCartAmount = () => {
         let total = 0;
         for (let item in cartItems) {
             if (cartItems[item] > 0) {
-                let itemInfo = food_list.find((product) => product._id === item);
+                let itemInfo = productList.find((product) => product.name === item);
                 total += itemInfo.price * cartItems[item];
             }
         }
         return total.toFixed(2);
     };
 
-    let [loading, setLoading] = useState(false);
-
-    let fetchFoodList = async () => {
-        setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        let response = await axios.get(`${url}/api/food/list`);
-        setFoodList(response.data.data);
-        setLoading(false);
-    }
-
-    const loadCartData = async (token) => {
-        let response = await axios.post(url + '/api/cart/get', {}, {
-            headers: { token }
-        });
-        setCartItems(response.data.cartData);
-    }
-
-    const fetchAverageRating = async (itemId) => {
-        try {
-            const response = await axios.post(`${url}/api/ratings/getAverageRating`, { itemId });
-            if(response.data.success) {
-                return response.data.data.averageRating;
-            }
-        } catch (error) {
-            console.error('Error fetching average rating:', error);
-        }
-        return 0;
-    };
-
-    const handleRatingChange = async (itemId, newValue) => {
-        if(!token) {
+    const handleRatingChange = async (name, newValue) => {
+        if(!isAuthenticated) {
             toast.error('You need to be logged in to rate products');
-            return
+            return;
         }
-        
-        try {
-            const endpoint = `${url}/api/ratings/updateRating`;
-            await axios.post(endpoint, {
-                itemId,
-                rating: newValue
-            }, {
-                headers: { token }
-            });
-        } catch (error) {
-            console.error('Error updating rating:', error);
-        }
+        dispatch(updateRating({ name, rating: newValue, token: accessToken }));
     };
 
     useEffect(() => {
-        async function loadData() {
-        await fetchFoodList();
-        if(localStorage.getItem('token')){
-               setToken(localStorage.getItem('token'));            
-               await loadCartData(localStorage.getItem('token'));
-         }
+        dispatch(fetchProductList());
+        if(isAuthenticated){
+            dispatch(loadCartData(accessToken));
         }
+    }, [dispatch, isAuthenticated, accessToken]);
 
-        loadData();
-    }, [])
-
-    let contextValue = {
-        food_list,
+    return {
+        product_list: productList,
         cartItems,
-        setCartItems,
-        addToCart,
-        removeFromCart,
+        addToCart: handleAddToCart,
+        removeFromCart: handleRemoveFromCart,
         getTotalCartAmount,
-        url,
-        token,
-        setToken,
-        loading,
-        fetchAverageRating,
-        handleRatingChange
+        loading: cartLoading || productLoading,
+        fetchAverageRating: (name) => dispatch(fetchAverageRating(name)),
+        handleRatingChange,
+        ratings
     };
-
-    return (
-        <StoreContext.Provider value={contextValue}>
-            {props.children}
-        </StoreContext.Provider>
-    );
 };
-
-export default StoreContextProvider;
