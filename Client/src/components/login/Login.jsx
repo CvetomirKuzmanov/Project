@@ -23,7 +23,7 @@ export default function Login() {
 			const authData = await login(email, password);
 			userLoginHandler(authData);
 			toast.success('Successful Login');
-			navigate(-1);
+			navigate();
 		} catch (err) {
 			toast.error(err.message);
 		} finally {

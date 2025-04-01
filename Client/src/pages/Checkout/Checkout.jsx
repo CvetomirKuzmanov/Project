@@ -1,35 +1,100 @@
-import './Checkout.css'
+import './Checkout.css';
 import { useNavigate } from 'react-router';
-import { useStore } from '../../contexts/StoreContext'
-import React, { useEffect, useState } from 'react'
-import useAuth from '../../hooks/useAuth'
+import { useStore } from '../../contexts/StoreContext';
+import React, { useEffect, useState } from 'react';
+import useAuth from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
+import { useLatestProducts } from '../../api/productApi';
+import { useSelector } from 'react-redux';
 
 export default function Checkout() {
-    const { getCartData, cart_list } = useStore();
-    const [cartData, setCartData] = useState([]);
+    const { getCartData, removeFromCart } = useStore();
     const { isAuthenticated, accessToken } = useAuth();
     const navigate = useNavigate();
+    const { latestProducts } = useLatestProducts();
+    const cartStoreItems = useSelector(state => state.cart.items);
+
+    const [cartData, setCartData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const loadCart = async () => {
-            const data = await getCartData();
-            setCartData(data);
-        };
+        // Flag to prevent excessive API calls
+        let isMounted = true;
+        setIsLoading(true);
         
-        if (isAuthenticated) {
-            loadCart();
+        const fetchCartData = async () => {
+            if (!isAuthenticated) {
+                toast.error('Please log in to view your cart');
+                setIsLoading(false);
+                return;
+            }
+            
+            try {
+                const data = await getCartData();
+                
+                if (isMounted && data) {
+                    const updatedCartData = data.map(cartItem => {
+                        const product = latestProducts.find(p => p._id === cartItem.productId);
+                        
+                        if (product) {
+                            return {
+                                ...cartItem,
+                                name: product.name,
+                                price: product.price,
+                                image: product.image,
+                            };
+                        }
+                        return cartItem;
+                    });
+                    setCartData(updatedCartData);
+                }
+            } catch (error) {
+                if (isMounted) {
+                    toast.error('Failed to load cart data');
+                    console.error('Error fetching cart data:', error);
+                }
+            } finally {
+                if (isMounted) {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        fetchCartData();
+        
+        return () => {
+            isMounted = false;
+        };
+    }, [isAuthenticated, latestProducts]); 
+
+    const handleRemoveProduct = async (productId) => {
+        try {
+            await removeFromCart({ _id: productId, token: accessToken });
+            setCartData(prevCartData => prevCartData.filter(item => item._id !== productId));
+            toast.success('Item removed from cart');
+        } catch (error) {
+            toast.error('Failed to remove item from cart');
+            console.error('Error removing product:', error);
         }
-    }, [isAuthenticated]);
-
-    const handleCartList = () => {
-        navigate('/catalog');
+    };
+    
+    const calculateSubtotal = () => {
+        return cartData.reduce((total, item) => {
+            return total + (parseFloat(item.price));
+        }, 0).toFixed(2);
     };
 
-    const handleRemoveProduct = (productId) => {
-        console.log(`Removing product with ID: ${productId}`);
+    const calculateTax = () => {
+        const TAX_RATE = 0.07;
+        const subtotal = parseFloat(calculateSubtotal());
+        return (subtotal * TAX_RATE).toFixed(2);
     };
 
-    const itemsToRender = cartData.length > 0 ? cartData : cart_list || [];
+    const calculateTotal = () => {
+        const subtotal = parseFloat(calculateSubtotal());
+        const tax = parseFloat(calculateTax());
+        return (subtotal + tax).toFixed(2);
+    };
 
     return (
         <section className="checkout">
@@ -110,20 +175,27 @@ export default function Checkout() {
                     <div className="order-summary">
                         <h2>Order Summary</h2>
                         <div className="cart-items">
-                            {itemsToRender.length > 0 ? (
-                                itemsToRender.map(product => (
+                            {isLoading ? (
+                                <p>Loading cart items...</p>
+                            ) : cartData.length > 0 ? (
+                                cartData.map(product => (
                                     <div className="cart-item" key={product._id}>
                                         <div className="cart-item-img">
                                             <img src={product.image} alt={product.name} />
                                         </div>
                                         <div className="cart-item-details">
-                                            <h4>{product.name}</h4>
+                                            <a >{product.name}</a>
                                             <div className="cart-item-price">
                                                 <span className="price">${product.price}</span>
                                             </div>
-                                            <button className="remove-item-btn" onClick={() => handleRemoveProduct(product._id)}>
-                                                Remove
-                                            </button>
+                                        </div>
+                                        <div className="remove-item-wrapper">
+                                            <span
+                                                className="remove-item-x"
+                                                onClick={() => handleRemoveProduct(product._id)}
+                                            >
+                                                &times;
+                                            </span>
                                         </div>
                                     </div>
                                 ))
@@ -132,32 +204,25 @@ export default function Checkout() {
                             )}
                         </div>
 
-                        <div className="order-totals">
-                            <div className="total-row">
-                                <span>Subtotal</span>
-                                <span>$79.98</span>
+                        {/* Price calculations section */}
+                        {cartData.length > 0 && (
+                            <div className="order-totals">
+                                <div className="total-row">
+                                    <span>Subtotal:</span>
+                                    <span>${calculateSubtotal()}</span>
+                                </div>
+                                <div className="total-row">
+                                    <span>Tax (7%):</span>
+                                    <span>${calculateTax()}</span>
+                                </div>
+                                <div className="total-row total">
+                                    <span>Total:</span>
+                                    <span>${calculateTotal()}</span>
+                                </div>
                             </div>
-                            <div className="total-row">
-                                <span>Shipping</span>
-                                <span>$5.99</span>
-                            </div>
-                            <div className="total-row">
-                                <span>Tax</span>
-                                <span>$8.00</span>
-                            </div>
-                            <div className="total-row total">
-                                <span>Total</span>
-                                <span>$93.97</span>
-                            </div>
-                        </div>
-
-                        <div className="promo-code">
-                            <input type="text" placeholder="Promo Code" />
-                            <button>Apply</button>
-                        </div>
-
+                        )}
                         <div className="checkout-actions">
-                            <a onClick={handleCartList} className="continue-shopping">Continue Shopping</a>
+                            <a onClick={() => navigate('/catalog')} className="continue-shopping">Continue Shopping</a>
                             <button className="place-order-btn">Place Order</button>
                         </div>
                     </div>

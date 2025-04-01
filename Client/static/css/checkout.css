@@ -215,10 +215,13 @@
     flex: 1;
 }
 
-.cart-item-details h4 {
+.cart-item-details-pointer{
     font-size: 16px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
+
+
 
 .cart-item-info {
     display: flex;

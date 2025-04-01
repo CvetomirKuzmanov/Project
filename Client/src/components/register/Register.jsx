@@ -20,7 +20,7 @@ export default function Register() {
 
 
 		if (password !== confirmPassword) {
-			console.log('Password mismatch');
+			toast.error('Password mismatch');
 			return;
 		}
 		try {

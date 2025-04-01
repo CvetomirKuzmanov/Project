@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import useAuth from '../../hooks/useAuth';
 
 export default function Product(product) {
-    const { addToCart, cart_list } = useStore();
+    const { addToCart } = useStore();
     const { isAuthenticated } = useAuth();
 
     const handleAddToCart = () => {
@@ -19,7 +19,7 @@ export default function Product(product) {
     return (
         <div className="product-card" key={product._id}>
             <div className="product-img">
-                <Link to={`/products/${product.name}/details`}><img src={product.img} alt={product.name} /></Link>
+                <Link to={`/products/${product.name}/details`}><img src={product.image} alt={product.name} /></Link>
                 <div className="product-actions">
                     <Link to={`/products/${product.name}/details`}><div className="product-action-btn">👁️</div></Link>
                     <div className="product-action-btn">❤️</div>

@@ -193,6 +193,7 @@
 }
 
 .cart-item {
+    position: relative;
     display: flex;
     gap: 15px;
     padding: 15px 0;
@@ -209,6 +210,16 @@
     font-size: 12px;
     color: #888;
     border-radius: 4px;
+    overflow: hidden; /* Added to contain the image */
+}
+
+/* Add specific image styling for cart items */
+.cart-item-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    width: auto;
+    height: auto;
 }
 
 .cart-item-details {
@@ -297,6 +308,7 @@
     color: #333;
     font-weight: 500;
     padding: 10px;
+    cursor: pointer; /* Added to show it's clickable */
 }
 
 .place-order-btn {
@@ -373,4 +385,29 @@
 
 .remove-item-btn:hover {
     background-color: #ff0000;
+}
+
+.remove-item-wrapper {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    z-index: 2; /* Ensure it's above the image */
+}
+
+.remove-item-x {
+    font-size: 20px;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.remove-item-x:hover {
+    color: #f7b1b1;
 }

@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router'
 import { ToastContainer } from 'react-toastify'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
-
+import './App.css'
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import Login from "./components/login/Login";

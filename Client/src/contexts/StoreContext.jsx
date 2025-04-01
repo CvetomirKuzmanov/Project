@@ -12,7 +12,6 @@ export const useStore = () => {
     const { isAuthenticated, accessToken } = useAuth();
 
     const handleAddToCart = async (_id) => {
-        console.log('Adding to cart:', { _id, isAuthenticated, accessToken });
         if (!isAuthenticated) {
             toast.error('Please login to add items to cart');
             return;
@@ -23,18 +22,40 @@ export const useStore = () => {
             toast.error('Product not found');
             return;
         }
-        try {
             dispatch(addToCart({ _id: product._id, token: accessToken }));
             toast.success('Added to cart!');
+    };
+    const handleRemoveFromCart = async (props) => {
+        if (!isAuthenticated) {
+            toast.error('Please login to remove items from cart');
+            return;
+        }
+        
+        if (!props._id) {
+            console.error("Product ID is missing!");
+            return;
+        }
+        
+        console.log('Removing from cart:', props);
+        const productId = props._id;
+        
+        try {
+            const resultAction = await dispatch(removeFromCart({ 
+                _id: productId, 
+                token: accessToken 
+            }));
+            
+            if (removeFromCart.fulfilled.match(resultAction)) {
+                toast.success('Removed from cart!');
+            } else {
+                toast.error('Failed to remove from cart');
+            }
         } catch (err) {
-            console.log(err.message);
-
+            console.error('Error removing from cart:', err);
+            toast.error('Error removing product from cart');
         }
     };
-    const handleRemoveFromCart = async (_id) => {
-        console.log('Removing from cart:', { _id });
-        dispatch(removeFromCart({ _id: product._id, token: accessToken }));
-    };
+    
 
     const getTotalCartAmount = () => {
         let total = 0;
@@ -63,19 +84,9 @@ export const useStore = () => {
         try {
             const resultAction = await dispatch(loadCartData(accessToken));
             if (loadCartData.fulfilled.match(resultAction)) {
-                console.log('Raw cart data:', resultAction.payload);
-    
-                const enrichedCart = resultAction.payload.map(cartItem => {
-                    const product = productList.find(p => p._id === cartItem.productId);
-                    return product
-                        ? { ...cartItem, ...product }  
-                        : cartItem;  
-                });
-    
-                console.log('Enriched cart data:', enrichedCart);
-                return enrichedCart;
+                return resultAction.payload;
             } else {
-                toast.error('Failed to load cart data');
+                toast.error('No products in cart!');
                 return null;
             }
         } catch (err) {
@@ -86,12 +97,19 @@ export const useStore = () => {
     
     useEffect(() => {
         dispatch(fetchProductList());
-        console.log ("dispatch fetchproductlist" )
-        console.log(dispatch(fetchProductList()));
+    
+        if (isAuthenticated) {
+            dispatch(loadCartData(accessToken));
+        }
+    }, [dispatch, isAuthenticated, accessToken]);
+    
+    
+    useEffect(() => {
+        dispatch(fetchProductList());
+ 
         
         if (isAuthenticated) {
             dispatch(loadCartData(accessToken));
-            console.log ("dispatch loadCart data" + dispatch(loadCartData(accessToken)));
         }
     }, [dispatch, isAuthenticated, accessToken]);
 

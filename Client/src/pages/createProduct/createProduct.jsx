@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useCreateProduct } from '../../api/productApi';
-import './createProduct.css'; // You would need to create this or import the right CSS
+import './createProduct.css'; 
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -11,12 +11,10 @@ export default function CreateProduct() {
 
     const formData = new FormData(event.target);
 
-    console.log (formData)
 
     const productData = Object.fromEntries(formData);
     await createProduct(productData);
 
-    console.log (productData)
     navigate('/catalog');
   };
 
