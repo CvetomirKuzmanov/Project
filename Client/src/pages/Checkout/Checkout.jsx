@@ -1,13 +1,35 @@
 import './Checkout.css'
 import { useNavigate } from 'react-router';
-import { useLatestProducts } from '../../api/productApi';
-import { useStore } from '../../contexts/StoreContext' 
-import React, { useContext } from 'react'
-export default function Checkout() {
+import { useStore } from '../../contexts/StoreContext'
+import React, { useEffect, useState } from 'react'
+import useAuth from '../../hooks/useAuth'
 
-    const { product_list } = useStore()
-    console.log (product_list)
-    const navigate = useNavigate()
+export default function Checkout() {
+    const { getCartData, cart_list } = useStore();
+    const [cartData, setCartData] = useState([]);
+    const { isAuthenticated, accessToken } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const loadCart = async () => {
+            const data = await getCartData();
+            setCartData(data);
+        };
+        
+        if (isAuthenticated) {
+            loadCart();
+        }
+    }, [isAuthenticated]);
+
+    const handleCartList = () => {
+        navigate('/catalog');
+    };
+
+    const handleRemoveProduct = (productId) => {
+        console.log(`Removing product with ID: ${productId}`);
+    };
+
+    const itemsToRender = cartData.length > 0 ? cartData : cart_list || [];
 
     return (
         <section className="checkout">
@@ -83,27 +105,31 @@ export default function Checkout() {
                                 </div>
                             </form>
                         </div>
-
-
                     </div>
 
                     <div className="order-summary">
                         <h2>Order Summary</h2>
                         <div className="cart-items">
-                            {product_list.map(product => (
-                                <div className="cart-item" key={product.name}     >
-                                    <div className="cart-item-img">
-                                        <img src={product.image} alt={product.name} />
-                                    </div>
-                                    <div className="cart-item-details">
-                                        <h4>{product.name}</h4>
-
-                                        <div className="cart-item-price">
-                                            <span className="price">${product.price}</span>
+                            {itemsToRender.length > 0 ? (
+                                itemsToRender.map(product => (
+                                    <div className="cart-item" key={product._id}>
+                                        <div className="cart-item-img">
+                                            <img src={product.image} alt={product.name} />
+                                        </div>
+                                        <div className="cart-item-details">
+                                            <h4>{product.name}</h4>
+                                            <div className="cart-item-price">
+                                                <span className="price">${product.price}</span>
+                                            </div>
+                                            <button className="remove-item-btn" onClick={() => handleRemoveProduct(product._id)}>
+                                                Remove
+                                            </button>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p>Your cart is empty.</p>
+                            )}
                         </div>
 
                         <div className="order-totals">
@@ -131,7 +157,7 @@ export default function Checkout() {
                         </div>
 
                         <div className="checkout-actions">
-                            <a onClick={() => navigate('/catalog')} className="continue-shopping">Continue Shopping</a>
+                            <a onClick={handleCartList} className="continue-shopping">Continue Shopping</a>
                             <button className="place-order-btn">Place Order</button>
                         </div>
                     </div>

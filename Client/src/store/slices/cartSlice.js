@@ -1,63 +1,87 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import request from '../../utils/request';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import request from "../../utils/request";
 
-const BASE_URL = 'http://localhost:3030';
+
+// Match the URL pattern from your working examples
+const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/data/cart`;
 
 export const addToCart = createAsyncThunk(
-    'cart/add',
-    async ({ name, token }, { rejectWithValue }) => {
+    "cart/add",
+    async ({ _id, token }, { rejectWithValue }) => {
         try {
-            console.log('Making add to cart request:', { name, token, url: `${BASE_URL}/cart/add` });
-            if (token) {
-                const response = await request.post(`${BASE_URL}/cart/add`, { name });
-                console.log('Add to cart response:', response);
-                return name;
-            }
+            console.log("Making add to cart request:", {
+                _id,
+                url: BASE_URL,
+            });
+            // Match your working product creation pattern
+            const response = await request.post(
+                BASE_URL,
+                { productId: _id },
+                token ? { headers: { 'X-Authorization': token } } : undefined
+            );
+            console.log("Add to cart response:", response);
+            return response; // Return the entire response to be consistent
         } catch (error) {
-            console.error('Add to cart error:', error);
-            return rejectWithValue(error.response?.data || 'Failed to add to cart');
+            console.error("Add to cart error:", error);
+            return rejectWithValue(
+                error.response?.data || "Failed to add to cart"
+            );
         }
     }
 );
 
 export const removeFromCart = createAsyncThunk(
-    'cart/remove',
-    async ({ name, token }, { rejectWithValue }) => {
+    "cart/remove",
+    async ({ _id, token }, { rejectWithValue }) => {
         try {
-            console.log('Making remove from cart request:', { name, token, url: `${BASE_URL}/cart/remove` });
-            if (token) {
-                const response = await request.post(`${BASE_URL}/cart/remove`, { name });
-                console.log('Remove from cart response:', response);
-                return name;
-            }
+            console.log("Making remove from cart request:", {
+                _id,
+                url: `${BASE_URL}/${_id}`,
+            });
+            // Use DELETE for removal like in your product delete
+            const response = await request.delete(
+                `${BASE_URL}/${_id}`,
+                token ? { headers: { 'X-Authorization': token } } : undefined
+            );
+            console.log("Remove from cart response:", response);
+            return _id;
         } catch (error) {
-            console.error('Remove from cart error:', error);
-            return rejectWithValue(error.response?.data || 'Failed to remove from cart');
+            console.error("Remove from cart error:", error);
+            return rejectWithValue(
+                error.response?.data || "Failed to remove from cart"
+            );
         }
     }
 );
 
 export const loadCartData = createAsyncThunk(
-    'cart/loadCartData',
+    "cart/loadCartData",
     async (token, { rejectWithValue }) => {
         try {
-            console.log('Making load cart request:', { token, url: `${BASE_URL}/cart/get` });
-            const response = await request.get(`${BASE_URL}/cart/get`);
-            console.log('Load cart response:', response);
+            const response = await request.get(
+                BASE_URL,
+                null, 
+                token ? { headers: { 'X-Authorization': token } } : undefined
+            );
+            console.log("Load cart response:", response);
             return response;
         } catch (error) {
-            console.error('Load cart error:', error);
-            return rejectWithValue(error.response?.data || 'Failed to load cart');
+            console.error("Load cart error:", error);
+            return rejectWithValue(
+                error.response?.data || "Failed to load cart"
+            );
         }
     }
 );
 
+
+
 const cartSlice = createSlice({
-    name: 'cart',
+    name: "cart",
     initialState: {
         items: {},
         loading: false,
-        error: null
+        error: null,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -68,9 +92,11 @@ const cartSlice = createSlice({
             })
             .addCase(addToCart.fulfilled, (state, action) => {
                 state.loading = false;
-                const name = action.payload;
-                state.items[name] = (state.items[name] || 0) + 1;
-                console.log('Cart state after adding:', state.items);
+                const item = action.payload;
+                if (item && item._id) {
+                    state.items[item._id] = (state.items[item._id] || 0) + 1;
+                }
+                console.log("Cart state after adding:", state.items);
             })
             .addCase(addToCart.rejected, (state, action) => {
                 state.loading = false;
@@ -82,11 +108,11 @@ const cartSlice = createSlice({
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 state.loading = false;
-                const name = action.payload;
-                if (state.items[name] > 0) {
-                    state.items[name] -= 1;
+                const _id = action.payload;
+                if (state.items[_id] > 0) {
+                    state.items[_id] -= 1;
                 }
-                console.log('Cart state after removing:', state.items);
+                console.log("Cart state after removing:", state.items);
             })
             .addCase(removeFromCart.rejected, (state, action) => {
                 state.loading = false;
@@ -98,14 +124,22 @@ const cartSlice = createSlice({
             })
             .addCase(loadCartData.fulfilled, (state, action) => {
                 state.loading = false;
-                state.items = action.payload;
-                console.log('Cart state after loading:', state.items);
+                // Transform the array into an object with counts if needed
+                if (Array.isArray(action.payload)) {
+                    state.items = action.payload.reduce((acc, item) => {
+                        acc[item.productId] = (acc[item.productId] || 0) + 1;
+                        return acc;
+                    }, {});
+                } else {
+                    state.items = action.payload || {};
+                }
+                console.log("Cart state after loading:", state.items);
             })
             .addCase(loadCartData.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });
-    }
+    },
 });
 
-export default cartSlice.reducer; 
+export default cartSlice.reducer;

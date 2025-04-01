@@ -119,3 +119,29 @@
     color: #fcc419;
     font-size: 14px;
 }
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 2px;
+  }
+  
+  .quantity-control button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .quantity-control span {
+    margin: 0 8px;
+    min-width: 20px;
+    text-align: center;
+  }
