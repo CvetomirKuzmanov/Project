@@ -71,7 +71,6 @@ export default function Checkout() {
         try {
             await removeFromCart({ _id: productId, token: accessToken });
             setCartData(prevCartData => prevCartData.filter(item => item._id !== productId));
-            toast.success('Item removed from cart');
         } catch (error) {
             toast.error('Failed to remove item from cart');
             console.error('Error removing product:', error);

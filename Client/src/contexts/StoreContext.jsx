@@ -36,7 +36,6 @@ export const useStore = () => {
             return;
         }
         
-        console.log('Removing from cart:', props);
         const productId = props._id;
         
         try {

@@ -8,16 +8,11 @@ export const addToCart = createAsyncThunk(
     "cart/add",
     async ({ _id, token }, { rejectWithValue }) => {
         try {
-            console.log("Making add to cart request:", {
-                _id,
-                url: BASE_URL,
-            });
             const response = await request.post(
                 BASE_URL,
                 { productId: _id },
                 token ? { headers: { "X-Authorization": token } } : undefined
             );
-            console.log("Add to cart response:", response);
             return response;
         } catch (error) {
             console.error("Add to cart error:", error);
@@ -32,17 +27,12 @@ export const removeFromCart = createAsyncThunk(
     "cart/remove",
     async ({ _id, token }, { rejectWithValue }) => {
         try {
-            console.log("Making remove from cart request:", {
-                _id,
-                url: `${BASE_URL}/${_id}`,
-            });
             const response = await request.delete(
                 `${BASE_URL}/${_id}`,
                 null,
                 token ? { headers: { "X-Authorization": token } } : undefined
             );
 
-            console.log("Remove from cart response:", response);
             return response;
         } catch (error) {
             console.error("Remove from cart error:", error);
