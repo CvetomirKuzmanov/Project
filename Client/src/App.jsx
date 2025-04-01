@@ -18,6 +18,7 @@ import Catalog from './pages/Catalog/Catalog';
 import About from './pages/About/About';
 import CreateProduct from './pages/createProduct/createProduct';
 import ProductDetails from './pages/productDetails/productDetails';
+import Checkout from './pages/Checkout/Checkout';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 					<Route path="/about" element={<About />} />
 					<Route path="/catalog" element={<Catalog />} />
 					<Route element={<AuthGuard />}>
+						<Route path="/checkout" element={<Checkout />} />
 						<Route path="/logout" element={<Logout />} />
 						<Route path="/create" element={<CreateProduct />} />]
 					</Route>

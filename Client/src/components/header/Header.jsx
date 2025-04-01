@@ -27,7 +27,7 @@ export default function Header() {
                                 < button onClick={() => navigate('#')} className="nav-icon">
                                     <span className="icon-text">Favorites</span>
                                 </button>
-                                <button onClick={() => navigate('#')} className="nav-icon">
+                                <button onClick={() => navigate('/checkout')} className="nav-icon">
                                     <span className="icon-text">Cart</span>
                                 </button>
                                 <button onClick={() => navigate('/logout')} className="nav-icon">

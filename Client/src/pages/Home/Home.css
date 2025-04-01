@@ -437,3 +437,26 @@
     transform: translateY(-2px);
 }
 
+/* No products message styling */
+.no-products-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.no-products-message p:first-child {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.no-products-message p:last-child {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+

@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import request from '../../utils/request';
 
-const BASE_URL = 'http://localhost:3030/data/products';
+const BASE_URL = 'http://localhost:3030';
 
 export const addToCart = createAsyncThunk(
-    'cart/addToCart',
+    'cart/add',
     async ({ name, token }, { rejectWithValue }) => {
         try {
             console.log('Making add to cart request:', { name, token, url: `${BASE_URL}/cart/add` });
@@ -21,7 +21,7 @@ export const addToCart = createAsyncThunk(
 );
 
 export const removeFromCart = createAsyncThunk(
-    'cart/removeFromCart',
+    'cart/remove',
     async ({ name, token }, { rejectWithValue }) => {
         try {
             console.log('Making remove from cart request:', { name, token, url: `${BASE_URL}/cart/remove` });
