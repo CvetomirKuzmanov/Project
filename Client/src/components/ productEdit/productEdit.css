@@ -21,7 +21,7 @@
 }
 
 .pe-product-preview-panel {
-  flex: 1;
+  cursor: default;  flex: 1;
   background-color: #ffffff;
   box-shadow: none;
   border: none;

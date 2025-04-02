@@ -9,15 +9,15 @@ export default function ProductEdit() {
     const navigate = useNavigate();
     const { productId } = useParams();
     const { product, isLoading } = useProduct(productId);
-    const { update: updateProduct } = useEditProduct();
+    const { edit } = useEditProduct();
     const { isAuthenticated, userId } = useAuth();
     const isOwner = userId === product._ownerId;
 
     const [formValues, setFormValues] = useState({
-        name: '',
-        price: '',
-        image: '',
-        description: ''
+        name: String,
+        price: Number,
+        image: String,
+        description: String
     });
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export default function ProductEdit() {
         }
 
         try {
-            await updateProduct(productId, formValues);
+            await edit(productId, formValues);
             toast.success('Product updated successfully');
             navigate(`/products/${productId}`);
         } catch (error) {
@@ -160,7 +160,7 @@ export default function ProductEdit() {
                                             type="button"
                                             className="pe-cancel-btn"
                                             data-pe-button="cancel"
-                                            onClick={() => navigate(`/products/${productId}`)}
+                                            onClick={() => navigate(`/products/${productId}/details`)}
                                         >
                                             Cancel
                                         </button>
@@ -168,6 +168,7 @@ export default function ProductEdit() {
                                             type="submit" 
                                             className="pe-submit-btn"
                                             data-pe-button="submit"
+                                            onClick={() => navigate(`/products/${productId}/details`)}
                                         >
                                             Update Product
                                         </button>
