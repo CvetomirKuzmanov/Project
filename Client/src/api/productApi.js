@@ -3,7 +3,7 @@ import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import request from "../utils/request";
 
-const BASE_URL = 'http://localhost:3030/data/products';
+const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/data/products`
 
 export const useProducts = () => {
     const [loading, setLoading] = useState(false);

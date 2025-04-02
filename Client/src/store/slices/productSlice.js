@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3030/data/products';
+const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/data/products`
 
 export const fetchProductList = createAsyncThunk(
     'products/fetchProductList',

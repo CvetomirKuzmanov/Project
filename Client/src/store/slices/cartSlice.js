@@ -10,7 +10,7 @@ export const addToCart = createAsyncThunk(
         try {
             const response = await request.post(
                 BASE_URL,
-                { productId: _id, userId: userId }, // Include userId in the payload
+                { productId: _id, userId: userId }, 
                 token ? { headers: { "X-Authorization": token } } : undefined
             );
             return response;
