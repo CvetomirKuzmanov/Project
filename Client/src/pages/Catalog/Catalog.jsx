@@ -8,32 +8,23 @@ import Pagination from '../../components/pagination/Pagination';
 export default function Catalog() {
     const { getProducts } = useProducts();
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
     const [itemOffset, setItemOffset] = useState(0);
     const [sortType, setSortType] = useState('Featured');
     const [searchFilters, setSearchFilters] = useState({
         term: '',
-        priceRange: { min: 0, max: 200 }
+        priceRange: { min: 0 }
     });
     const itemsPerPage = 3;
 
     useEffect(() => {
         if (getProducts.length > 0) {
             setProducts([...getProducts]);
-            setFilteredProducts([...getProducts]);
         }
     }, [getProducts]);
 
-    // Apply filtering when search filters change
-    useEffect(() => {
-        applyFiltersAndSort();
-    }, [searchFilters, sortType, products]);
-
-    const applyFiltersAndSort = () => {
-        // Start with all products
+    const getFilteredAndSortedProducts = () => {
         let result = [...products];
         
-        // Apply search term filter
         if (searchFilters.term && searchFilters.term.trim() !== '') {
             const term = searchFilters.term.toLowerCase().trim();
             result = result.filter(product => 
@@ -42,46 +33,30 @@ export default function Catalog() {
             );
         }
         
-        // Apply price range filter
         if (searchFilters.priceRange) {
             result = result.filter(product => 
-                product.price >= searchFilters.priceRange.min && 
-                product.price <= searchFilters.priceRange.max
+                product.price >= searchFilters.priceRange.min
             );
         }
         
-        // Apply sorting
-        result = sortProductsList(result, sortType);
-        
-        // Update filtered products
-        setFilteredProducts(result);
-        
-        // Reset pagination when filters change
-        setItemOffset(0);
-    };
-
-    const sortProductsList = (productsToSort, sortValue) => {
-        const sorted = [...productsToSort];
-        
-        switch(sortValue) {
+        switch(sortType) {
             case 'Price: Low to High':
-                sorted.sort((a, b) => Number(a.price) - Number(b.price));
+                result.sort((a, b) => Number(a.price) - Number(b.price));
                 break;
             case 'Price: High to Low':
-                sorted.sort((a, b) => Number(b.price) - Number(a.price));
+                result.sort((a, b) => Number(b.price) - Number(a.price));
                 break;
             case 'Name: A to Z':
-                sorted.sort((a, b) => a.name.localeCompare(b.name));
+                result.sort((a, b) => a.name.localeCompare(b.name));
                 break;
             case 'Name: Z to A':
-                sorted.sort((a, b) => b.name.localeCompare(a.name));
+                result.sort((a, b) => b.name.localeCompare(a.name));
                 break;
             default:
-                // Default 'Featured' sorting logic
                 break;
         }
         
-        return sorted;
+        return result;
     };
 
     const handleSortChange = (e) => {
@@ -99,18 +74,17 @@ export default function Catalog() {
     const handlePriceFilter = (priceRange) => {
         setSearchFilters(prev => ({
             ...prev,
-            priceRange
         }));
     };
 
     const handleClearFilters = () => {
         setSearchFilters({
             term: '',
-            priceRange: { min: 0, max: 200 }
+            priceRange: { min: 0 }
         });
     };
 
-    // Calculate page details
+    const filteredProducts = getFilteredAndSortedProducts();
     const endOffset = itemOffset + itemsPerPage;
     const currentProducts = filteredProducts.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);

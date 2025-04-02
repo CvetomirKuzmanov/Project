@@ -16,9 +16,11 @@ import GuestGuard from './components/guards/GuestGuard'
 import UserProvider from './providers/UserProvider'
 import Catalog from './pages/Catalog/Catalog';
 import About from './pages/About/About';
-import CreateProduct from './pages/createProduct/createProduct';
+import CreateProduct from './components/productCreate/createProduct';
 import ProductDetails from './components/productDetails/productDetails';
 import Checkout from './pages/Checkout/Checkout';
+import EditProduct from './components/ productEdit/productEdit'
+import ProductEdit from './components/ productEdit/productEdit'
 
 
 function App() {
@@ -32,9 +34,11 @@ function App() {
 					<Route path="/about" element={<About />} />
 					<Route path="/catalog" element={<Catalog />} />
 					<Route element={<AuthGuard />}>
+						<Route path="//products/:productId/edit" element={<ProductEdit />} />
 						<Route path="/checkout" element={<Checkout />} />
 						<Route path="/logout" element={<Logout />} />
-						<Route path="/create" element={<CreateProduct />} />]
+						<Route path="/create" element={<CreateProduct />} />
+
 					</Route>
 
 					<Route element={<GuestGuard />}>

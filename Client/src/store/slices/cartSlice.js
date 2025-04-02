@@ -52,7 +52,6 @@ export const loadCartData = createAsyncThunk(
                 null,
                 token ? { headers: { "X-Authorization": token } } : undefined
             );
-            console.log("response", response);
             return response;
         } catch (error) {
             return rejectWithValue(error.message || "Failed to load cart");

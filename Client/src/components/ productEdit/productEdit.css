@@ -1,0 +1,353 @@
+.pe-edit-product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.pe-edit-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 40px 0;
+  font-weight: 400;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-edit-layout {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.pe-product-preview-panel {
+  flex: 1;
+  background-color: #ffffff;
+  box-shadow: none;
+  border: none;
+}
+
+.pe-product-preview-panel h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #222;
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-preview-product-card {
+  background-color: white;
+  overflow: hidden;
+  border: none;
+  box-shadow: none;
+}
+
+.pe-preview-product-image {
+  height: 350px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.pe-preview-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.pe-no-image-placeholder {
+  color: #767676;
+  text-align: center;
+  padding: 40px;
+  font-style: italic;
+  font-size: 0.875rem;
+}
+
+.pe-preview-product-details {
+  padding: 24px;
+}
+
+.pe-preview-product-title {
+  font-size: 1.25rem;
+  color: #222222;
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.pe-preview-product-pricing {
+  margin-bottom: 24px;
+}
+
+.pe-preview-product-current-price {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #222;
+}
+
+.pe-preview-product-description {
+  color: #767676;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-size: 0.875rem;
+}
+
+.pe-preview-product-actions {
+  display: flex;
+  margin-top: auto;
+}
+
+.pe-preview-product-action-button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.pe-preview-product-action-button:hover {
+  background-color: #444;
+}
+
+.pe-edit-form-panel {
+  flex: 1;
+}
+
+.pe-edit-form-wrapper {
+  background-color: white;
+  padding: 30px;
+  border: none;
+  box-shadow: none;
+}
+
+.pe-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pe-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pe-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pe-form-group label {
+  font-weight: 400;
+  color: #222;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-form-group input, 
+.pe-form-group textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 0.875rem;
+  color: #222;
+}
+
+.pe-form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.pe-form-group.pe-full-width {
+  grid-column: span 2;
+}
+
+.pe-form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pe-cancel-btn,
+.pe-submit-btn {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.pe-cancel-btn {
+  background-color: #fff;
+  color: #222;
+  border: 1px solid #222;
+}
+
+.pe-cancel-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.pe-submit-btn {
+  background-color: #222;
+  color: white;
+}
+
+.pe-submit-btn:hover {
+  background-color: #444;
+}
+
+.pe-product-tips {
+  margin-top: 40px;
+  padding: 30px 0;
+  background-color: #fff;
+  border: none;
+}
+
+.pe-section-title {
+  margin-bottom: 30px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-text-center {
+  text-align: center;
+}
+
+.pe-tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.pe-tip-card {
+  background-color: white;
+  padding: 20px;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+  transition: none;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.pe-tip-card:hover {
+  transform: none;
+}
+
+.pe-tip-icon {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.pe-tip-card h3 {
+  margin-bottom: 10px;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-tip-card p {
+  color: #767676;
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+.pe-loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 0.875rem;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Unauthorized access styling */
+.pe-unauthorized-access {
+  max-width: 500px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 30px;
+}
+
+.pe-unauthorized-access h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #222;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-unauthorized-access p {
+  color: #767676;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+}
+
+.pe-return-button {
+  display: inline-block;
+  background-color: #222;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pe-return-button:hover {
+  background-color: #444;
+}
+
+.pe-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 900px) {
+  .pe-edit-layout {
+    flex-direction: column;
+  }
+  
+  .pe-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pe-form-group.pe-full-width {
+    grid-column: span 1;
+  }
+}

@@ -13,7 +13,10 @@ export default function ProductDetails() {
   const { productId } = useParams();
   const { product } = useProduct(productId);
   const isOwner = userId === product._ownerId;
-  
+
+
+
+
   const handleAddToCart = () => {
     if (!isAuthenticated) {
       toast.error('Please login to add items to cart');

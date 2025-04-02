@@ -25,7 +25,6 @@ export const useProducts = () => {
                 setLoading(false);
             });
     }, []);
-
     return { getProducts, loading, error };
 
 };
@@ -52,7 +51,7 @@ export const useLatestProducts = () => {
         setLoading(true);
         const searchParams = new URLSearchParams({
             sortBy: '_createdOn desc',
-            pageSize: 10
+            pageSize: 4
         });
         
         axios.get(`${BASE_URL}?${searchParams.toString()}`)
