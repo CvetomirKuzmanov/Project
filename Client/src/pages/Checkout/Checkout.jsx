@@ -5,20 +5,17 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { useLatestProducts } from '../../api/productApi';
-import { useSelector } from 'react-redux';
 
 export default function Checkout() {
     const { getCartData, removeFromCart } = useStore();
     const { isAuthenticated, accessToken } = useAuth();
     const navigate = useNavigate();
     const { latestProducts } = useLatestProducts();
-    const cartStoreItems = useSelector(state => state.cart.items);
 
     const [cartData, setCartData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        // Flag to prevent excessive API calls
         let isMounted = true;
         setIsLoading(true);
         
@@ -31,7 +28,7 @@ export default function Checkout() {
             
             try {
                 const data = await getCartData();
-                
+                console.log ('data in checkout', data)
                 if (isMounted && data) {
                     const updatedCartData = data.map(cartItem => {
                         const product = latestProducts.find(p => p._id === cartItem.productId);

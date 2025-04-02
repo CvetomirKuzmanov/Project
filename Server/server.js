@@ -1213,7 +1213,6 @@
         }, settings.rules);
 
         return function decorateContext(context, request) {
-            // special rules (evaluated at run-time)
             const get = (collectionName, id) => {
                 return context.storage.get(collectionName, id);
             };

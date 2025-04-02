@@ -1,51 +1,33 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+import request from "../utils/request";
 
 const BASE_URL = 'http://localhost:3030/data/products';
 
 export const useProducts = () => {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
-        axios.get(BASE_URL)
-            .then(response => {
-                setProducts(response.data);
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err.response?.data || 'Failed to fetch products');
-                setLoading(false);
-            });
+        request.get(BASE_URL)
+            .then(setProducts)
     }, []);
 
-    return { products, loading, error };
+    return { products };
+
 };
 
 export const useProduct = (productId) => {
     const [product, setProduct] = useState({});
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!productId) return;
-        
-        setLoading(true);
-        axios.get(`${BASE_URL}/${productId}`)
-            .then(response => {
-                setProduct(response.data);
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err.response?.data || 'Failed to fetch product');
-                setLoading(false);
-            });
-    }, [productId]);
-
-    return { product, loading, error };
+            request.get(`${BASE_URL}/${productId}`)
+                .then(setProduct);
+        }, [productId])
+    
+        return {
+            product,
+        };
 };
 
 export const useLatestProducts = () => {

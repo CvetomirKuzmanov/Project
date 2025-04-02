@@ -25,16 +25,14 @@ export const useStore = () => {
             dispatch(addToCart({ _id: product._id, token: accessToken }));
             toast.success('Added to cart!');
     };
+    
     const handleRemoveFromCart = async (props) => {
         if (!isAuthenticated) {
             toast.error('Please login to remove items from cart');
             return;
         }
         
-        if (!props._id) {
-            console.error("Product ID is missing!");
-            return;
-        }
+
         
         const productId = props._id;
         
@@ -82,6 +80,7 @@ export const useStore = () => {
     
         try {
             const resultAction = await dispatch(loadCartData(accessToken));
+            console.log (resultAction)
             if (loadCartData.fulfilled.match(resultAction)) {
                 return resultAction.payload;
             } else {
@@ -97,16 +96,6 @@ export const useStore = () => {
     useEffect(() => {
         dispatch(fetchProductList());
     
-        if (isAuthenticated) {
-            dispatch(loadCartData(accessToken));
-        }
-    }, [dispatch, isAuthenticated, accessToken]);
-    
-    
-    useEffect(() => {
-        dispatch(fetchProductList());
- 
-        
         if (isAuthenticated) {
             dispatch(loadCartData(accessToken));
         }

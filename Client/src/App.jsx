@@ -28,7 +28,7 @@ function App() {
 				<Header />
 				<Routes>
 					<Route path='/' element={<Home />} />
-					<Route path="/details" element={<ProductDetails />} />
+					<Route path="/products/:productId/details" element={<ProductDetails />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/catalog" element={<Catalog />} />
 					<Route element={<AuthGuard />}>

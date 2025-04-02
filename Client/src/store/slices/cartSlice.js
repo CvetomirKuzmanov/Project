@@ -6,11 +6,11 @@ const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/data/cart`;
 
 export const addToCart = createAsyncThunk(
     "cart/add",
-    async ({ _id, token }, { rejectWithValue }) => {
+    async ({ _id, token, userId }, { rejectWithValue }) => {
         try {
             const response = await request.post(
                 BASE_URL,
-                { productId: _id },
+                { productId: _id, userId: userId }, // Include userId in the payload
                 token ? { headers: { "X-Authorization": token } } : undefined
             );
             return response;
@@ -44,7 +44,7 @@ export const removeFromCart = createAsyncThunk(
 );
 
 export const loadCartData = createAsyncThunk(
-    "cart/loadCartData",
+    "cart/loadData",
     async (token, { rejectWithValue }) => {
         try {
             const response = await request.get(
@@ -52,11 +52,10 @@ export const loadCartData = createAsyncThunk(
                 null,
                 token ? { headers: { "X-Authorization": token } } : undefined
             );
+            console.log("response", response);
             return response;
         } catch (error) {
-            return rejectWithValue(
-                error.response?.data || "Failed to load cart"
-            );
+            return rejectWithValue(error.message || "Failed to load cart");
         }
     }
 );
