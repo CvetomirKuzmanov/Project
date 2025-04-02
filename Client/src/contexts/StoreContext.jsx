@@ -23,7 +23,7 @@ export const useStore = () => {
             return;
         }
             dispatch(addToCart({ _id: product._id, token: accessToken }));
-            toast.success('Added to cart!');
+            toast.success('Added to favourites!');
     };
     
     const handleRemoveFromCart = async (props) => {
@@ -80,7 +80,6 @@ export const useStore = () => {
     
         try {
             const resultAction = await dispatch(loadCartData(accessToken));
-            console.log (resultAction)
             if (loadCartData.fulfilled.match(resultAction)) {
                 return resultAction.payload;
             } else {

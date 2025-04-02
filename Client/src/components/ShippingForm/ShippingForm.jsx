@@ -1,53 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useNavigate } from 'react';
 import { toast } from 'react-toastify';
-import { useCreateCart } from '../../hooks/useCreateCart';
-import useAuth from '../hooks/useAuth';
+import { useCreateProduct } from '../../api/productApi';
+import useAuth from '../../hooks/useAuth';
 import './ShippingForm.css';
 
 const ShippingForm = () => {
-  const { create, loading, error } = useCreateCart();
-  const { userId } = useAuth();
+    const navigate = useNavigate();
+    const { create: createProduct } = useCreateProduct();
   
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    zip: '',
-    country: ''
-  });
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      const formData = new FormData(event.target);
+  
+  
+      const productData = Object.fromEntries(formData);
+      await createProduct(productData);
+  
+      navigate('/catalog');
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [id.replace('-', '')]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-      // Create cart data object with shipping info and user ID
-      const cartData = {
-        userId,
-        shippingInfo: {
-          ...formData
-        },
-        items: [] // You can populate this with cart items if needed
-      };
-      
-      const result = await create(cartData);
-      toast.success('Shipping information saved successfully!');
-      // You might want to redirect the user to the next step in checkout
-      // e.g., navigate('/payment');
-    } catch (err) {
-      toast.error(error || 'Failed to save shipping information');
-    }
   };
 
   return (

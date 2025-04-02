@@ -52,10 +52,10 @@ export default function ProductDetails() {
             <div>
               <p className="hm-product-description">{product.description}</p>
               <div className="hm-product-actions">
-              {!isOwner && (
+              {/* {!isOwner && (
                 <div className="hm-product-action-button hm-wishlist-button">❤️</div>
-              )}
-                <div className="hm-product-action-button" onClick={handleAddToCart}>🛒 Add To Cart</div>
+              )} */}
+                <div className="hm-product-action-button" onClick={handleAddToCart}>❤️ Add To Favourites</div>
               </div>
             </div>
             {isOwner && (

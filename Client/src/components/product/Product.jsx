@@ -22,8 +22,8 @@ export default function Product(product) {
                 <Link to={`/products/${product.name}/details`}><img src={product.image} alt={product.name} /></Link>
                 <div className="product-actions">
                     <Link to={`/products/${product._id}/details`}><div className="product-action-btn">👁️</div></Link>
-                    <div className="product-action-btn">❤️</div>
-                    <div className="product-action-btn" onClick={handleAddToCart}>🛒</div>
+                    {/* <div className="product-action-btn">❤️</div> */}
+                    <div className="product-action-btn" onClick={handleAddToCart}>❤️</div>
                 </div>
             </div>
             <div className="product-info">

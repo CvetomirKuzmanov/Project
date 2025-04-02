@@ -8,7 +8,6 @@ import './Checkout.css';
 
 // Component imports
 import CheckoutSteps from '../../components/CheckoutSteps/CheckoutSteps';
-import ShippingForm from '../../components/ShippingForm/ShippingForm';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 
 export default function Checkout() {
@@ -110,13 +109,8 @@ export default function Checkout() {
     return (
         <section className="checkout">
             <div className="container">
-                <CheckoutSteps />
 
                 <div className="checkout-container">
-                    <div className="checkout-details">
-                        <ShippingForm />
-                    </div>
-
                     <OrderSummary {...orderSummaryProps} />
                 </div>
             </div>

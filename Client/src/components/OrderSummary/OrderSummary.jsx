@@ -14,7 +14,7 @@ const OrderSummary = ({
 }) => {
     return (
         <div className="order-summary">
-            <h2>Order Summary</h2>
+            <h2>Favourites</h2>
             <div className="cart-items">
                 {isLoading ? (
                     <p>Loading cart items...</p>
@@ -43,7 +43,6 @@ const OrderSummary = ({
                 <a onClick={() => navigate('/catalog')} className="continue-shopping">
                     Continue Shopping
                 </a>
-                <button className="place-order-btn">Place Order</button>
             </div>
         </div>
     );

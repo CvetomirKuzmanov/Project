@@ -20,14 +20,12 @@ export default function Header() {
                     {isAuthenticated
                         ? (
                             <div>
-                                <button onClick={() => navigate('/admin')} className="nav-icon">
-                                    <span className="icon-text">Admin</span>
-                                </button>
+
                                 < button onClick={() => navigate('/create')} className="nav-icon">
                                     <span className="icon-text">Create</span>
                                 </button>
                                 <button onClick={() => navigate('/checkout')} className="nav-icon">
-                                    <span className="icon-text">Cart</span>
+                                    <span className="icon-text">Favourites</span>
                                 </button>
                                 <button onClick={() => navigate('/logout')} className="nav-icon">
                                     <span className="icon-text">Logout</span>

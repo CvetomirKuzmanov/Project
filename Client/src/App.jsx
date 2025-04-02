@@ -20,7 +20,6 @@ import CreateProduct from './components/productCreate/createProduct';
 import ProductDetails from './components/productDetails/productDetails';
 import Checkout from './pages/Checkout/Checkout';
 import ProductEdit from './components/productEdit/productEdit'
-import AdminPanel from './pages/admin/admin'
 
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 					</Route>
-					<Route path="/admin" element={<AdminPanel />} />
 
 
 
