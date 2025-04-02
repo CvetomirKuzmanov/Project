@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useProduct, useEditProduct } from '../../api/productApi';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -50,7 +50,7 @@ export default function ProductEdit() {
         try {
             await edit(productId, formValues);
             toast.success('Product updated successfully');
-            navigate(`/products/${productId}`);
+            navigate(`/products/${productId}/details`);
         } catch (error) {
             toast.error('Failed to update product');
             console.error(error);
@@ -160,15 +160,15 @@ export default function ProductEdit() {
                                             type="button"
                                             className="pe-cancel-btn"
                                             data-pe-button="cancel"
-                                            onClick={() => navigate(`/products/${productId}/details`)}
                                         >
                                             Cancel
                                         </button>
-                                        <button 
-                                            type="submit" 
+
+                                        <button
+                                            type="submit"
                                             className="pe-submit-btn"
                                             data-pe-button="submit"
-                                            onClick={() => navigate(`/products/${productId}/details`)}
+                                            onClick={() => navigate(`/catalog`)}
                                         >
                                             Update Product
                                         </button>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useContext } from "react";
-import { toast } from "react-toastify"; // Import toast
+import { toast } from "react-toastify"; 
 import request from "../utils/request"
 import { UserContext } from "../contexts/UserContext";
 
@@ -13,10 +13,9 @@ export const useLogin = () => {
         `${baseUrl}/login`,
         { email, password },
       );
-      toast.success("Login successful! Welcome back."); // Add success toast
+      toast.success("Login successful! Welcome back.");
       return result;
     } catch (error) {
-      // Optional: You can add error toast handling here if needed
       throw error;
     }
   }

@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import request from "../../utils/request";
-import useAuth from "../../hooks/useAuth";
 
 const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/data/cart`;
 

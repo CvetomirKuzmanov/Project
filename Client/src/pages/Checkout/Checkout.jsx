@@ -1,10 +1,15 @@
-import './Checkout.css';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useStore } from '../../contexts/StoreContext';
-import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { useProducts } from '../../api/productApi';
+import './Checkout.css';
+
+// Component imports
+import CheckoutSteps from '../../components/CheckoutSteps/CheckoutSteps';
+import ShippingForm from '../../components/ShippingForm/ShippingForm';
+import OrderSummary from '../../components/OrderSummary/OrderSummary';
 
 export default function Checkout() {
     const { getCartData, removeFromCart } = useStore();
@@ -28,7 +33,6 @@ export default function Checkout() {
             
             try {
                 const data = await getCartData();
-                console.log ('data in checkout', data)
                 if (isMounted && data) {
                     const updatedCartData = data.map(cartItem => {
                         const product = getProducts.find(p => p._id === cartItem.productId);
@@ -45,7 +49,6 @@ export default function Checkout() {
                         return cartItem;
                     });
                     setCartData(updatedCartData);
-
                 }
             } catch (error) {
                 if (isMounted) {
@@ -93,138 +96,28 @@ export default function Checkout() {
         const tax = parseFloat(calculateTax());
         return (subtotal + tax).toFixed(2);
     };
-    console.log ('Cart data', cartData)
+
+    const orderSummaryProps = {
+        cartData,
+        isLoading,
+        handleRemoveProduct,
+        calculateSubtotal,
+        calculateTax,
+        calculateTotal,
+        navigate
+    };
 
     return (
         <section className="checkout">
             <div className="container">
-                <div className="checkout-header">
-                    <div className="checkout-steps">
-                        <div className="step active">
-                            <div className="step-number">1</div>
-                            <div className="step-name">Shopping Cart</div>
-                        </div>
-                        <div className="step active">
-                            <div className="step-number">2</div>
-                            <div className="step-name">Checkout Details</div>
-                        </div>
-                        <div className="step">
-                            <div className="step-number">3</div>
-                            <div className="step-name">Complete Order</div>
-                        </div>
-                    </div>
-                </div>
+                <CheckoutSteps />
 
                 <div className="checkout-container">
                     <div className="checkout-details">
-                        <div className="shipping-info">
-                            <h2>Shipping Information</h2>
-                            <form className="shipping-form">
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="first-name">First Name</label>
-                                        <input type="text" id="first-name" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="last-name">Last Name</label>
-                                        <input type="text" id="last-name" required />
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="email">Email Address</label>
-                                    <input type="email" id="email" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="phone">Phone Number</label>
-                                    <input type="tel" id="phone" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="address">Street Address</label>
-                                    <input type="text" id="address" required />
-                                </div>
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="city">City</label>
-                                        <input type="text" id="city" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="state">State/Province</label>
-                                        <input type="text" id="state" required />
-                                    </div>
-                                </div>
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="zip">Zip/Postal Code</label>
-                                        <input type="text" id="zip" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="country">Country</label>
-                                        <select id="country" required>
-                                            <option value="">Select Country</option>
-                                            <option value="us">United States</option>
-                                            <option value="ca">Canada</option>
-                                            <option value="uk">United Kingdom</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        <ShippingForm />
                     </div>
 
-                    <div className="order-summary">
-                        <h2>Order Summary</h2>
-                        <div className="cart-items">
-                            {isLoading ? (
-                                <p>Loading cart items...</p>
-                            ) : cartData.length > 0 ? (
-                                cartData.map(product => (
-                                    <div className="cart-item" key={product._id}>
-                                        <div className="cart-item-img">
-                                            <img src={product.image} alt={product.name} />
-                                        </div>
-                                        <div className="cart-item-details">
-                                            <a >{product.name}</a>
-                                            <div className="cart-item-price">
-                                                <span className="price">${product.price}</span>
-                                            </div>
-                                        </div>
-                                        <div className="remove-item-wrapper">
-                                            <span
-                                                className="remove-item-x"
-                                                onClick={() => handleRemoveProduct(product._id)}
-                                            >
-                                                &times;
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>Your cart is empty.</p>
-                            )}
-                        </div>
-
-                        {/* Price calculations section */}
-                        {cartData.length > 0 && (
-                            <div className="order-totals">
-                                <div className="total-row">
-                                    <span>Subtotal:</span>
-                                    <span>${calculateSubtotal()}</span>
-                                </div>
-                                <div className="total-row">
-                                    <span>Tax (7%):</span>
-                                    <span>${calculateTax()}</span>
-                                </div>
-                                <div className="total-row total">
-                                    <span>Total:</span>
-                                    <span>${calculateTotal()}</span>
-                                </div>
-                            </div>
-                        )}
-                        <div className="checkout-actions">
-                            <a onClick={() => navigate('/catalog')} className="continue-shopping">Continue Shopping</a>
-                            <button className="place-order-btn">Place Order</button>
-                        </div>
-                    </div>
+                    <OrderSummary {...orderSummaryProps} />
                 </div>
             </div>
         </section>
