@@ -17,15 +17,14 @@ export default function Header() {
                     <a href="/about" className="nav-link">About</a>
                 </nav>
                 <div className="nav-icons">
-                    {/* <button onClick={() => navigate('./search')} className="nav-icon">🔍</button> */}
                     {isAuthenticated
                         ? (
                             <div>
                                 <button onClick={() => navigate('/admin')} className="nav-icon">
                                     <span className="icon-text">Admin</span>
                                 </button>
-                                < button onClick={() => navigate('#')} className="nav-icon">
-                                    <span className="icon-text">Favorites</span>
+                                < button onClick={() => navigate('/create')} className="nav-icon">
+                                    <span className="icon-text">Create</span>
                                 </button>
                                 <button onClick={() => navigate('/checkout')} className="nav-icon">
                                     <span className="icon-text">Cart</span>
@@ -43,7 +42,6 @@ export default function Header() {
                                 <button onClick={() => navigate('/register')} className="nav-icon">
                                     <span className="icon-text">Register</span>
                                 </button>
-
                             </div>
 
                         )

@@ -1,0 +1,222 @@
+/* H&M-inspired Product Details Styles with unique class names */
+
+
+.hm-product-card {
+  background-color: #ffffff;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: none;
+  border: none;
+}
+
+.hm-product-image {
+  position: relative;
+  width: 60%;
+  height: 600px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+.hm-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.hm-product-details {
+  padding: 40px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hm-product-title {
+  font-size: 1.25rem;
+  color: #222222;
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.hm-product-category {
+  color: #767676;
+  font-weight: 400;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hm-product-badge {
+  background-color: #f4f4f4;
+  color: #222;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hm-product-pricing {
+  margin-bottom: 24px;
+}
+
+.hm-product-current-price {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #222;
+}
+
+.hm-product-description {
+  color: #767676;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  font-size: 0.875rem;
+}
+
+.hm-product-actions {
+  position: relative;
+  top: auto;
+  right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.hm-product-action-button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  background-color: #222;
+  color: #fff;
+  border: none;
+}
+
+.hm-product-action-button:hover {
+  background-color: #444;
+  transform: none;
+}
+
+/* Heart icon styling */
+.hm-wishlist-button {
+  background-color: #fff;
+  color: #222;
+  border: 1px solid #222;
+}
+
+.hm-wishlist-button:hover {
+  background-color: #f4f4f4;
+}
+
+.hm-product-admin-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.hm-product-admin-btn {
+  display: inline-block;
+  background-color: #222;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 0;
+  text-decoration: none;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.hm-edit-button {
+  background-color: #222;
+}
+
+.hm-edit-button:hover {
+  background-color: #444;
+}
+
+.hm-delete-button {
+  background-color: #222;
+}
+
+.hm-delete-button:hover {
+  background-color: #444;
+}
+
+.hm-product-page-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 40px 0;
+  font-weight: 400;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hm-product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hm-product-card {
+    flex-direction: column;
+  }
+  
+  .hm-product-image,
+  .hm-product-details {
+    width: 100%;
+  }
+  
+  .hm-product-image {
+    height: 450px;
+  }
+  
+  .hm-product-details {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hm-product-image {
+    height: 350px;
+  }
+  
+  .hm-product-admin-buttons {
+    flex-direction: column;
+  }
+  
+  .hm-product-admin-btn {
+    width: 100%;
+  }
+  
+  .hm-product-action-button {
+    height: 44px;
+  }
+}

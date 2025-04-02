@@ -17,7 +17,7 @@ import UserProvider from './providers/UserProvider'
 import Catalog from './pages/Catalog/Catalog';
 import About from './pages/About/About';
 import CreateProduct from './pages/createProduct/createProduct';
-import ProductDetails from './pages/productDetails/productDetails';
+import ProductDetails from './components/productDetails/productDetails';
 import Checkout from './pages/Checkout/Checkout';
 
 

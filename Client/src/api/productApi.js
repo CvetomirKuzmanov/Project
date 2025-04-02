@@ -6,14 +6,27 @@ import request from "../utils/request";
 const BASE_URL = 'http://localhost:3030/data/products';
 
 export const useProducts = () => {
-    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [getProducts, setGetProducts] = useState([]);
 
     useEffect(() => {
-        request.get(BASE_URL)
-            .then(setProducts)
+
+        setLoading(true);
+
+        
+        axios.get(`${BASE_URL}`)
+            .then(response => {
+                setGetProducts(response.data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.response?.data || 'Failed to fetch latest products');
+                setLoading(false);
+            });
     }, []);
 
-    return { products };
+    return { getProducts, loading, error };
 
 };
 
@@ -39,7 +52,7 @@ export const useLatestProducts = () => {
         setLoading(true);
         const searchParams = new URLSearchParams({
             sortBy: '_createdOn desc',
-            pageSize: 3
+            pageSize: 10
         });
         
         axios.get(`${BASE_URL}?${searchParams.toString()}`)

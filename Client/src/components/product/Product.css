@@ -1,4 +1,4 @@
-/* Product Grid Styles for Catalog */
+Product Grid Styles for Catalog
 .catalog-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

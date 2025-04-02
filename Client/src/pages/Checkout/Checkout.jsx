@@ -4,13 +4,13 @@ import { useStore } from '../../contexts/StoreContext';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
-import { useLatestProducts } from '../../api/productApi';
+import { useProducts } from '../../api/productApi';
 
 export default function Checkout() {
     const { getCartData, removeFromCart } = useStore();
     const { isAuthenticated, accessToken } = useAuth();
     const navigate = useNavigate();
-    const { latestProducts } = useLatestProducts();
+    const { getProducts } = useProducts();
 
     const [cartData, setCartData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ export default function Checkout() {
                 console.log ('data in checkout', data)
                 if (isMounted && data) {
                     const updatedCartData = data.map(cartItem => {
-                        const product = latestProducts.find(p => p._id === cartItem.productId);
+                        const product = getProducts.find(p => p._id === cartItem.productId);
                         
                         if (product) {
                             return {
@@ -39,11 +39,13 @@ export default function Checkout() {
                                 name: product.name,
                                 price: product.price,
                                 image: product.image,
+                                description: product.description
                             };
                         }
                         return cartItem;
                     });
                     setCartData(updatedCartData);
+
                 }
             } catch (error) {
                 if (isMounted) {
@@ -58,11 +60,11 @@ export default function Checkout() {
         };
 
         fetchCartData();
-        
+
         return () => {
             isMounted = false;
         };
-    }, [isAuthenticated, latestProducts]); 
+    }, [isAuthenticated, getProducts]); 
 
     const handleRemoveProduct = async (productId) => {
         try {
@@ -91,6 +93,7 @@ export default function Checkout() {
         const tax = parseFloat(calculateTax());
         return (subtotal + tax).toFixed(2);
     };
+    console.log ('Cart data', cartData)
 
     return (
         <section className="checkout">

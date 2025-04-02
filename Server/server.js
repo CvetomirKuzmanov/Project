@@ -1354,6 +1354,38 @@
     			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
     		}
     	},
+        products: [
+            {
+                "_ownerId": "697214a8-3799-4403-85c5-82c2e4373208",
+                "productId": "99428a6b-0c2a-4202-bab3-4e1b39e821d9",
+                "_createdOn": 1743586344308,
+                "_id": "3ae1bc0a-3889-4d9d-8fe9-ce58cb5d73b0",
+                "name": "Structured Button-Up Jacket",
+                "price": "34.99",
+                "image": "https://media.meandem.com/client/dynamic/images/25579_69d1ddd9bd-0104rs_1_53b_m002_ss25ja257001946_ss25wt231000376_ss25tw346r000057_ss25sh510000299_056-original.jpg?imwidth=828",
+                "description": "Elevate your everyday ensemble with our Structured Button-Up Jacket. This thoughtfully designed piece features classic metal buttons that provide both functionality and subtle elegance. The tailored silhouette offers a flattering fit while maintaining comfortable movement through precision shoulder seams and expertly placed darts. Crafted from a durable cotton-blend fabric with a touch of stretch, this jacket transitions smoothly from office to evening with its versatile design. Two front flap pockets and an interior pocket add practicality without compromising the clean lines. Available in three classic colors that complement any wardrobe: charcoal, navy, and camel."
+              },
+              {
+                "_ownerId": "697214a8-3799-4403-85c5-82c2e4373208",
+                "productId": "1d12772f-f6ee-48af-ba98-7fdfeabc0e5b",
+                "_createdOn": 1743586344953,
+                "_id": "93f6b1ec-6ce3-4c81-85a1-a4314f7c3e00",
+                "name": "Classic White T-Shirt",
+                "price": "15.99",
+                "image": "https://img.sonofatailor.com/images/customizer/product/White_O_Crew_Regular_NoPocket.jpg",
+                "description": "Our Essential White T-Shirt combines timeless simplicity with superior comfort. Crafted from premium 100% organic cotton with a medium weight that ensures durability without sacrificing breathability. The clean, versatile design features a perfect crew neckline and tailored fit that's neither too loose nor too tight. Pre-washed for exceptional softness and minimal shrinkage, this wardrobe staple transitions effortlessly from casual everyday wear to a foundation piece for more polished looks. Available in sizes XS-XXL with a subtle embroidered logo at the hem that speaks to its quality craftsmanship."
+              },
+              {
+                "_ownerId": "697214a8-3799-4403-85c5-82c2e4373208",
+                "productId": "6a46c3ee-5e40-46b7-9274-674212668f09",
+                "_createdOn": 1743586345926,
+                "_id": "0d2d752a-6265-4a7e-b4af-fde5c6d9a2c9",
+                "name": "Blooming Seasons Floral Dress",
+                "price": "23.99",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrzwgqzbl_bD6ynPwZhB_zFrY2wnn-8mYEaw&s",
+                "description": "Embrace feminine charm with our Blooming Seasons Floral Dress. This captivating piece showcases a delicate pattern of hand-drawn botanicals against a flowing fabric that moves gracefully with every step. The thoughtfully designed silhouette features a flattering V-neckline, defined waist, and midi-length hem that creates an effortlessly elegant profile. Crafted from lightweight, breathable viscose with a silky finish that drapes beautifully across the body. Perfect for garden parties, summer weddings, or simply adding a touch of romance to your everyday wardrobe. The vibrant yet sophisticated floral print incorporates subtle seasonal hues that make this dress a standout piece that remains timeless."
+              }
+        ],
         games: [
             {
                 "_ownerId": "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
